@@ -5,6 +5,8 @@ import * as THREE from "three";
 import Grainient from "../components/ui/Grainient";
 import roomModelUrl from "../assets/models/room.glb?url";
 import AutumnLeaves from "../components/landing/AutumnLeaves";
+import DustMotes from "../components/landing/DustMotes";
+import "./Room.css";
 
 const FINAL_POSITION = new THREE.Vector3(10, 3, 8);
 const START_POSITION = new THREE.Vector3(40, 15, 30);
@@ -86,23 +88,28 @@ function LoadingScreen() {
 }
 
 export default function Room() {
-    
   return (
     <div style={{ width: "100vw", height: "100vh", overflow: "hidden", position: "relative" }}>
-        <AutumnLeaves />
+      <AutumnLeaves />
+      <DustMotes />
       <Grainient
-  className="room-grainient"
-  color1="#e8c9a8"
-  color2="#c97a4a"
-  color3="#a85268"
-  timeSpeed={0.15}
-  warpStrength={0.8}
-  warpAmplitude={40}
-  grainAmount={0.06}
-  contrast={1.1}
-  saturation={0.9}
-  zoom={1.1}
-/>
+        className="room-grainient"
+        color1="#e8c9a8"
+        color2="#c97a4a"
+        color3="#a85268"
+        timeSpeed={0.15}
+        warpStrength={0.8}
+        warpAmplitude={40}
+        grainAmount={0.06}
+        contrast={1.1}
+        saturation={0.9}
+        zoom={1.1}
+      />
+
+      <div className="room-caption">
+        <h2>SAMY'S ROOM</h2>
+        <p>a quiet corner, warmed by autumn light</p>
+      </div>
 
       <Suspense fallback={<LoadingScreen />}>
         <Canvas

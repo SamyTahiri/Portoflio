@@ -1,0 +1,37 @@
+.room-caption {
+  position: absolute;
+  bottom: 34px;
+  left: clamp(20px, 5vw, 64px);
+  z-index: 6;
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.4s both;
+}
+
+.room-caption h2 {
+  margin: 0;
+  font-family: "Schabo", serif;
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 48px);
+  letter-spacing: 0.05em;
+  color: #3a2b1a;
+  -webkit-text-stroke: 0.6px #fdf3e4;
+}
+
+.room-caption p {
+  margin: 6px 0 0;
+  font-family: "General Sans", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: #4a3520;
+  opacity: 0.75;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,38 @@
+.dust-mote {
+  position: absolute;
+  z-index: 4;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 250, 235, 1), rgba(255, 200, 140, 0.5) 60%, transparent 100%);
+  pointer-events: none;
+  animation-name: motefloat;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  box-shadow: 0 0 6px 2px rgba(255, 220, 160, 0.6);
+}
+
+@keyframes motefloat {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-20px) translateX(var(--drift));
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dust-mote {
+    animation: none;
+  }
+}
