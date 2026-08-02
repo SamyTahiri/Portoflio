@@ -1,0 +1,77 @@
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@700,600&f[]=general-sans@400,500&display=swap');
+
+@font-face {
+  font-family: "Fatbold";
+  src: url("/fonts/Fatbold-Demo.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Schabo";
+  src: url("/fonts/Schabo.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Game-Paused";
+  src: url("/fonts/Game-Paused.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root,
+[data-theme='dark'] {
+  --bg-top: #0a0a14;
+  --bg-mid: #10101f;
+  --text: #f3ebdd;
+  --accent: #e3a857;
+  --accent-soft: #b89b5e;
+  --accent-pink: #f4afc7;
+  --glow-radial: rgba(227, 168, 87, 0.16);
+  --celestial-core: #fbe3b8;
+  --celestial-mid: #e3a857;
+}
+
+[data-theme='light'] {
+  --bg-top: #fdf3e4;
+  --bg-mid: #fbe9d0;
+  --text: #2b2013;
+  --accent: #c97a2b;
+  --accent-soft: #a67c3d;
+  --accent-pink: #c85f78;
+  --glow-radial: rgba(201, 122, 43, 0.18);
+  --celestial-core: #fff4d6;
+  --celestial-mid: #ffb703;
+}
+
+body {
+  background-color: var(--bg-top);
+  color: var(--text);
+  transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+body {
+  background-color: #0a0a14;
+  color: #f3ebdd;
+  font-family: "General Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}

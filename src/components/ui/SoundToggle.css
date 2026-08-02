@@ -1,0 +1,61 @@
+.sound-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 4px 2px 10px;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: 'Clash Display', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.75s both;
+}
+
+.sound-button::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(227, 168, 87, 0.5);
+  transition: background 0.3s ease, box-shadow 0.3s ease, height 0.3s ease;
+}
+
+.sound-button:hover::after,
+.sound-button:focus-visible::after {
+  background: #e3a857;
+  height: 2px;
+  box-shadow: 0 0 12px rgba(227, 168, 87, 0.6);
+}
+
+.sound-button.active::after {
+  background: #e3a857;
+  box-shadow: 0 0 8px rgba(227, 168, 87, 0.4);
+}
+
+.sound-label {
+  display: inline-block;
+  animation: soundLabelIn 0.35s ease;
+}
+
+@keyframes soundLabelIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sound-label {
+    animation: none;
+  }
+}

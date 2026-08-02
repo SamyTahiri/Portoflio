@@ -1,0 +1,30 @@
+.petal {
+  position: absolute;
+  top: -10vh;
+  border-radius: 0% 70% 0% 70%;
+  background: linear-gradient(135deg, #fbd8e3, #f4afc7 70%);
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(115vh) translateX(var(--drift)) rotate(340deg);
+    opacity: 0.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .petal {
+    animation: none;
+  }
+}
