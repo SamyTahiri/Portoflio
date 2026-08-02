@@ -4,6 +4,7 @@ import { useGLTF, Environment, useProgress } from "@react-three/drei";
 import * as THREE from "three";
 import Grainient from "../components/ui/Grainient";
 import roomModelUrl from "../assets/models/room.glb?url";
+import AutumnLeaves from "../components/landing/AutumnLeaves";
 
 const FINAL_POSITION = new THREE.Vector3(10, 3, 8);
 const START_POSITION = new THREE.Vector3(40, 15, 30);
@@ -85,8 +86,10 @@ function LoadingScreen() {
 }
 
 export default function Room() {
+    
   return (
     <div style={{ width: "100vw", height: "100vh", overflow: "hidden", position: "relative" }}>
+        <AutumnLeaves />
       <Grainient
   className="room-grainient"
   color1="#e8c9a8"

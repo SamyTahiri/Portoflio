@@ -1,0 +1,44 @@
+.leaf {
+  position: absolute;
+  top: -10vh;
+  border-radius: 0% 70% 0% 70%;
+  animation-name: leafFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+.leaf-1 {
+  background: linear-gradient(135deg, #e3a857, #c9722f 70%);
+}
+
+.leaf-2 {
+  background: linear-gradient(135deg, #d68a3c, #a8502a 70%);
+}
+
+.leaf-3 {
+  background: linear-gradient(135deg, #b9542f, #7a3418 70%);
+}
+
+@keyframes leafFall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(50vh) translateX(calc(var(--drift) * 0.5)) rotate(200deg);
+  }
+  100% {
+    transform: translateY(115vh) translateX(var(--drift)) rotate(520deg);
+    opacity: 0.65;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leaf {
+    animation: none;
+  }
+}
