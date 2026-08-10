@@ -35,3 +35,23 @@
     transform: translateY(0);
   }
 }
+
+.door-popup {
+  background: rgba(20, 12, 6, 0.85);
+  color: #fdf3e4;
+  font-family: "General Sans", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(227, 168, 87, 0.5);
+  cursor: pointer;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.door-popup:hover {
+  background: rgba(30, 18, 10, 0.95);
+  border-color: #e3a857;
+}

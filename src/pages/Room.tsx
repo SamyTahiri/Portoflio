@@ -1,19 +1,101 @@
-import { Suspense, useRef } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useGLTF, Environment, useProgress } from "@react-three/drei";
+import { useGLTF, Environment, useProgress, OrbitControls, Html } from "@react-three/drei";
+import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
+import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
 import Grainient from "../components/ui/Grainient";
 import roomModelUrl from "../assets/models/room.glb?url";
 import AutumnLeaves from "../components/landing/AutumnLeaves";
 import DustMotes from "../components/landing/DustMotes";
+import ShapeOverlay, { type ShapeOverlayHandle } from "../components/landing/ShapeOverlay";
 import "./Room.css";
 
 const FINAL_POSITION = new THREE.Vector3(10, 3, 8);
 const START_POSITION = new THREE.Vector3(40, 15, 30);
+const MAX_ZOOM_DISTANCE = 18;
+const DOOR_NAME = "Object_231";
 
-function RoomModel() {
-  const { scene } = useGLTF(roomModelUrl);
-  return <primitive object={scene} position={[0, -1, 0]} />;
+function RoomModel({ onDoorHover }: { onDoorHover: (hovering: boolean) => void }) {
+  const { scene, nodes } = useGLTF(roomModelUrl);
+  const pivotRef = useRef<THREE.Group | null>(null);
+  const targetRotation = useRef(0);
+
+  useEffect(() => {
+    const door = nodes[DOOR_NAME] as THREE.Object3D | undefined;
+    if (!door || !door.parent) return;
+
+    door.updateWorldMatrix(true, false);
+
+    // world-space measurements (accounts for the door's real geometry offsets)
+    const box = new THREE.Box3().setFromObject(door);
+    const size = new THREE.Vector3();
+    box.getSize(size);
+    const center = new THREE.Vector3();
+    box.getCenter(center);
+
+    const widthAxis: "x" | "z" = size.x >= size.z ? "x" : "z";
+    const hingeWorld = center.clone();
+    if (widthAxis === "x") {
+      hingeWorld.x = box.max.x;
+    } else {
+      hingeWorld.z = box.max.z;
+    }
+
+    // CRITICAL FIX: convert the world-space hinge point into door.parent's
+    // local space before assigning it as pivot.position
+    const hingeLocal = door.parent.worldToLocal(hingeWorld.clone());
+
+    const pivot = new THREE.Group();
+    pivot.position.copy(hingeLocal);
+
+    door.parent.add(pivot);
+    pivot.attach(door); // preserves the door's real world transform
+
+    pivotRef.current = pivot;
+  }, [nodes]);
+
+  useFrame((_, delta) => {
+    if (pivotRef.current) {
+      const current = pivotRef.current.rotation.y;
+      const next = THREE.MathUtils.damp(current, targetRotation.current, 5, delta);
+      pivotRef.current.rotation.y = next;
+    }
+  });
+
+  return (
+    <primitive
+      object={scene}
+      position={[0, -1, 0]}
+      onPointerOver={(e: any) => {
+        if (e.object.name === DOOR_NAME) {
+          e.stopPropagation();
+          targetRotation.current = 0.6;
+          onDoorHover(true);
+          document.body.style.cursor = "pointer";
+        }
+      }}
+      onPointerOut={(e: any) => {
+        if (e.object.name === DOOR_NAME) {
+          targetRotation.current = 0;
+          onDoorHover(false);
+          document.body.style.cursor = "auto";
+        }
+      }}
+    />
+  );
+}
+
+function DoorPopup({ visible, onLeave }: { visible: boolean; onLeave: () => void }) {
+  if (!visible) return null;
+
+  return (
+    <Html position={[3, 1.2, 2]} center distanceFactor={8}>
+      <div className="door-popup" onClick={onLeave}>
+        Leave the room
+      </div>
+    </Html>
+  );
 }
 
 function CameraRig() {
@@ -88,6 +170,34 @@ function LoadingScreen() {
 }
 
 export default function Room() {
+  const navigate = useNavigate();
+  const overlayRef = useRef<ShapeOverlayHandle>(null);
+  const controlsRef = useRef<OrbitControlsImpl>(null);
+  const isLeavingRef = useRef(false);
+  const [isDoorHovered, setIsDoorHovered] = useState(false);
+
+  const leaveRoom = () => {
+    if (isLeavingRef.current) return;
+    isLeavingRef.current = true;
+    overlayRef.current?.play(() => navigate("/"));
+  };
+
+  useEffect(() => {
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY >= 0) return;
+
+      const controls = controlsRef.current;
+      const distance = controls ? controls.getDistance() : 0;
+
+      if (distance >= MAX_ZOOM_DISTANCE - 0.5) {
+        leaveRoom();
+      }
+    };
+
+    window.addEventListener("wheel", onWheel, { passive: true });
+    return () => window.removeEventListener("wheel", onWheel);
+  }, []);
+
   return (
     <div style={{ width: "100vw", height: "100vh", overflow: "hidden", position: "relative" }}>
       <AutumnLeaves />
@@ -111,6 +221,8 @@ export default function Room() {
         <p>a quiet corner, warmed by autumn light</p>
       </div>
 
+      <p className="room-hint">scroll to look closer · scroll up to leave</p>
+
       <Suspense fallback={<LoadingScreen />}>
         <Canvas
           camera={{ position: [40, 15, 30], fov: 40 }}
@@ -121,10 +233,21 @@ export default function Room() {
           <ambientLight intensity={0.45} color="#ffd9b3" />
           <directionalLight position={[8, 3, 2]} intensity={1.1} color="#ff9d6c" />
           <Environment preset="sunset" />
-          <RoomModel />
+          <RoomModel onDoorHover={setIsDoorHovered} />
+          <DoorPopup visible={isDoorHovered} onLeave={leaveRoom} />
           <CameraRig />
+          <OrbitControls
+            ref={controlsRef}
+            enableRotate={false}  
+            enablePan={false}
+            enableZoom={true}
+            minDistance={6}
+            maxDistance={MAX_ZOOM_DISTANCE}
+          />
         </Canvas>
       </Suspense>
+
+      <ShapeOverlay ref={overlayRef} />
     </div>
   );
 }
