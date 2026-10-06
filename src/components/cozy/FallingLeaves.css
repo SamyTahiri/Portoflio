@@ -1,0 +1,62 @@
+.cz-leaves {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cz-leaves__fall {
+  position: absolute;
+  top: 0;
+  animation-name: cz-leaf-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.cz-leaves__sway {
+  display: block;
+  animation-name: cz-leaf-sway;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cz-leaves__sway svg {
+  display: block;
+  opacity: 0.9;
+  animation: cz-leaf-flutter 2.6s ease-in-out infinite alternate;
+}
+
+@keyframes cz-leaf-fall {
+  from {
+    transform: translateY(-60px);
+  }
+  to {
+    transform: translateY(calc(100vh + 60px));
+  }
+}
+
+@keyframes cz-leaf-sway {
+  from {
+    transform: translateX(calc(var(--sway) * -1)) rotate(-30deg);
+  }
+  to {
+    transform: translateX(var(--sway)) rotate(40deg);
+  }
+}
+
+@keyframes cz-leaf-flutter {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(55deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cz-leaves {
+    display: none;
+  }
+}

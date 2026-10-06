@@ -1,0 +1,42 @@
+.cz-tapes {
+  position: relative;
+  z-index: 2;
+  height: 150px;
+  margin: 8px 0 -20px;
+}
+
+.cz-tape {
+  position: absolute;
+  left: -5%;
+  width: 110%;
+  padding: 14px 0;
+  border-block: 2.5px solid var(--ink);
+}
+
+.cz-tape--back {
+  top: 30px;
+  background: var(--butter);
+  transform: rotate(2deg);
+}
+
+.cz-tape--front {
+  top: 52px;
+  background: var(--orange);
+  box-shadow: 0 10px 24px -14px rgba(58, 43, 26, 0.6);
+  transform: rotate(-2.2deg);
+}
+
+.cz-tape__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font: 600 var(--logoloop-logoHeight, 18px) / 1 var(--font-pixel);
+  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.cz-tape__star {
+  color: var(--orange-deep);
+}

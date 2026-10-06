@@ -1,0 +1,74 @@
+.cz-window {
+  overflow: hidden;
+  border: 2.5px solid var(--ink);
+  border-radius: 16px;
+  background: var(--paper);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.cz-window__bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 42px;
+  padding: 0 14px;
+  border-bottom: 2.5px solid var(--ink);
+  background-color: var(--butter);
+  background-image: repeating-linear-gradient(180deg, transparent 0 4px, rgba(58, 43, 26, 0.22) 4px 6px);
+  background-size: 100% 26px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cz-window__dots {
+  display: flex;
+  gap: 6px;
+  padding-right: 6px;
+  background: var(--butter);
+}
+
+.cz-window__dots i {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+}
+
+.cz-window__dots i:first-child {
+  background: var(--orange);
+}
+
+.cz-window__title {
+  margin: 0 auto;
+  padding: 0 12px;
+  background: var(--butter);
+  font: 600 16px var(--font-pixel);
+  white-space: nowrap;
+}
+
+.cz-window__spacer {
+  width: 54px;
+}
+
+/* 28px button + 26px margin keeps the title centred against the 54px dots */
+.cz-window__close {
+  width: 28px;
+  height: 26px;
+  margin-left: 26px;
+  padding: 0;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  background: var(--paper);
+  font: 600 18px/1 var(--font-pixel);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.cz-window__close:hover {
+  background: var(--orange);
+}
+
+.cz-window__body {
+  padding: clamp(20px, 3vw, 32px);
+}
