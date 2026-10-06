@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import PixelSprite from "./PixelSprite";
+import { LofiEngine } from "./lofiEngine";
 import "./MenuBar.css";
 
 const LINKS = [
@@ -48,47 +49,41 @@ function useClock() {
 }
 
 function MusicToggle() {
-  const audioRef = useRef<HTMLAudioElement>(null);
+  // the engine (and its AudioContext) is only created on the first click
+  const engineRef = useRef<LofiEngine | null>(null);
   const [playing, setPlaying] = useState(false);
 
+  useEffect(() => () => engineRef.current?.dispose(), []);
+
   const toggle = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    if (!audio.paused) {
-      audio.pause();
+    engineRef.current ??= new LofiEngine();
+    const engine = engineRef.current;
+    if (playing) {
+      engine.stop();
+      setPlaying(false);
       return;
     }
-    audio.volume = 0.45;
-    // browsers can refuse playback; the button simply stays "off"
-    audio.play().catch(() => setPlaying(false));
+    setPlaying(true);
+    // browsers can refuse to start audio; the button simply flips back to "off"
+    engine.start().catch(() => setPlaying(false));
   };
 
   return (
-    <>
-      <audio
-        ref={audioRef}
-        src="/audios/ambient.mp3"
-        loop
-        preload="none"
-        onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-      />
-      <button
-        type="button"
-        className={`cz-music${playing ? " is-playing" : ""}`}
-        onClick={toggle}
-        aria-pressed={playing}
-      >
-        <span className="cz-music__bars" aria-hidden="true">
-          <i />
-          <i />
-          <i />
-          <i />
-        </span>
-        <span className="cz-music__label">{playing ? "now playing" : "lo-fi"}</span>
-        <span className="cz-visually-hidden"> ambient music</span>
-      </button>
-    </>
+    <button
+      type="button"
+      className={`cz-music${playing ? " is-playing" : ""}`}
+      onClick={toggle}
+      aria-pressed={playing}
+    >
+      <span className="cz-music__bars" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+        <i />
+      </span>
+      <span className="cz-music__label">{playing ? "now playing" : "lo-fi"}</span>
+      <span className="cz-visually-hidden"> music</span>
+    </button>
   );
 }
 
