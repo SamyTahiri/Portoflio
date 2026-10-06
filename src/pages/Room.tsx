@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, type ThreeEvent } from "@react-three/fiber";
 import { useGLTF, Environment, useProgress, OrbitControls, Html } from "@react-three/drei";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import { useNavigate } from "react-router-dom";
@@ -67,7 +67,7 @@ function RoomModel({ onDoorHover }: { onDoorHover: (hovering: boolean) => void }
     <primitive
       object={scene}
       position={[0, -1, 0]}
-      onPointerOver={(e: any) => {
+      onPointerOver={(e: ThreeEvent<PointerEvent>) => {
         if (e.object.name === DOOR_NAME) {
           e.stopPropagation();
           targetRotation.current = 0.6;
@@ -75,7 +75,7 @@ function RoomModel({ onDoorHover }: { onDoorHover: (hovering: boolean) => void }
           document.body.style.cursor = "pointer";
         }
       }}
-      onPointerOut={(e: any) => {
+      onPointerOut={(e: ThreeEvent<PointerEvent>) => {
         if (e.object.name === DOOR_NAME) {
           targetRotation.current = 0;
           onDoorHover(false);

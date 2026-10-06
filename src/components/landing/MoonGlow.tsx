@@ -1,4 +1,4 @@
-import { useTheme } from "../ui/ThemeContent";
+import { useTheme } from "../ui/useTheme";
 import "./MoonGlow.css";
 
 export default function MoonGlow() {

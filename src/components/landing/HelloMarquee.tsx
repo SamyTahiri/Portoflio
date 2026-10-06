@@ -1,5 +1,5 @@
 import { LogoLoop } from "./LogoLoop";
-import { useTheme } from "../ui/ThemeContent";
+import { useTheme } from "../ui/useTheme";
 
 const GREETINGS = [
   "Hello", "Bonjour", "こんにちは", "Hola", "Hallo", "Ciao", "Olá",

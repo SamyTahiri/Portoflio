@@ -31,10 +31,11 @@
   background-size: 28px 28px;
 }
 
-/* the global stylesheet paints the body dark for the other pages */
+/* the global stylesheet paints the body dark for the other pages (and fades it, which flashed on load) */
 body:has(.cz-page) {
   background: #f6ead8;
   color: #3a2b1a;
+  transition: none;
 }
 
 html:has(.cz-page) {

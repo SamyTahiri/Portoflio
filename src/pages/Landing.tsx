@@ -7,7 +7,6 @@ import ProfileScroll from "../components/landing/ProfileScroll";
 import SoundToggle from "../components/ui/SoundToggle";
 import HelloMarquee from "../components/landing/HelloMarquee";
 import ShapeOverlay, { type ShapeOverlayHandle } from "../components/landing/ShapeOverlay";
-import Grainient from "../components/ui/Grainient";
 
 export default function Landing() {
   const navigate = useNavigate();
