@@ -1,7 +1,6 @@
 import { Fragment, useRef, type CSSProperties } from "react";
 import { motion } from "framer-motion";
 import PixelSprite from "./PixelSprite";
-import RobotBuddy from "./RobotBuddy";
 import { SPRITES, type SpriteName } from "./pixelArt";
 import { useMediaQuery } from "./useMediaQuery";
 import { profile } from "../../data/portfolio";
@@ -87,10 +86,6 @@ export default function Hero() {
                   say hello
                 </a>
               </div>
-            </div>
-
-            <div className="cz-hero__buddy">
-              <RobotBuddy />
             </div>
 
             <span className="cz-code cz-code--title" aria-hidden="true">

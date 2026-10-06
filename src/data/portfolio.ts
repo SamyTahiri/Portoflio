@@ -83,7 +83,7 @@ export const projects: Project[] = [
     kind: "web · design",
     year: "2026",
     description:
-      "The cozy corner you're scrolling right now: pixel stickers you can drag, a robot that watches your cursor and far too many leaves.",
+      "The cozy corner you're scrolling right now: pixel stickers you can drag, a lo-fi radio that composes itself and far too many leaves.",
     tags: ["React", "TypeScript", "Framer Motion"],
     links: [{ label: "back to the top", href: "#top" }],
     sprite: "floppy",
@@ -112,13 +112,4 @@ export const marqueeWords = [
   "GSAP",
   "pixel art",
   "cozy UI",
-];
-
-export const robotLines = [
-  "beep boop! welcome to my corner of the internet",
-  "psst… the stickers are draggable",
-  "I run on tea and curiosity",
-  "fun fact: I'm made of about 30 SVG shapes",
-  "scroll down — there's more cozy stuff!",
-  "okay, okay, I'll stop talking now :)",
 ];

@@ -47,11 +47,10 @@
 
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
-  align-items: center;
-  gap: 24px;
+  place-items: center;
   min-height: min(660px, calc(100svh - 150px));
-  padding: clamp(56px, 7vw, 88px) clamp(28px, 5vw, 72px) clamp(48px, 6vw, 72px) clamp(80px, 8vw, 112px);
+  padding: clamp(64px, 8vw, 96px) clamp(80px, 8vw, 112px);
+  text-align: center;
   overflow: hidden;
   border: 2px solid rgba(58, 43, 26, 0.6);
   border-radius: 24px;
@@ -146,8 +145,8 @@
 }
 
 .cz-hero__intro {
-  max-width: 34ch;
-  margin: 14px 0 0;
+  max-width: 40ch;
+  margin: 14px auto 0;
   font-size: clamp(1.05rem, 1.5vw, 1.2rem);
   line-height: 1.6;
   color: var(--ink-soft);
@@ -156,6 +155,7 @@
 .cz-hero__actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 16px;
   margin-top: 34px;
 }
@@ -174,13 +174,6 @@
   animation: cz-tap 2.8s ease-in-out infinite;
 }
 
-.cz-hero__buddy {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-}
-
 /* ---------- doodles ---------- */
 
 .cz-code {
@@ -193,19 +186,19 @@
 }
 
 .cz-code--title {
-  top: 9%;
-  left: 47%;
+  top: 14%;
+  left: 9%;
   animation-delay: -1.7s;
 }
 
 .cz-code--html {
-  bottom: 12%;
-  right: 4%;
+  top: 17%;
+  right: 9%;
 }
 
 .cz-code--p {
-  bottom: 7%;
-  left: 42%;
+  bottom: 13%;
+  right: 15%;
   animation-delay: -3.3s;
 }
 
@@ -334,17 +327,13 @@
 
 @media (max-width: 900px) {
   .cz-notebook__paper {
-    grid-template-columns: 1fr;
     min-height: 0;
-  }
-
-  .cz-hero__buddy {
-    margin-top: 8px;
+    padding: 72px 48px 64px 72px;
   }
 
   .cz-code--html {
-    bottom: auto;
-    top: 6%;
+    top: 7%;
+    right: 7%;
   }
 
   .cz-code--title,
@@ -383,7 +372,7 @@
   .cz-notebook__paper {
     --margin-line: 22px;
 
-    padding: 60px 22px 36px 40px;
+    padding: 60px 24px 48px 38px;
     border-radius: 20px;
   }
 

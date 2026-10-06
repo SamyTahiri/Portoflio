@@ -1,39 +1,73 @@
+/* full-width bar at the top of the page; a floating pill once you scroll (.is-compact) */
 .cz-menubar {
   position: sticky;
   top: 0;
   z-index: 50;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 16px;
-  height: 58px;
+  height: 64px;
   padding: 0 clamp(14px, 3vw, 28px);
   border-bottom: 2.5px solid var(--ink);
   background: rgba(255, 250, 241, 0.88);
   -webkit-backdrop-filter: blur(10px) saturate(1.2);
   backdrop-filter: blur(10px) saturate(1.2);
   font-family: var(--font-pixel);
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    backdrop-filter 0.35s ease;
+}
+
+.cz-menubar.is-compact {
+  border-bottom-color: transparent;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.cz-menubar__start {
+  justify-self: start;
 }
 
 .cz-menubar__brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 600;
+  letter-spacing: 0.02em;
   color: var(--ink);
   text-decoration: none;
 }
 
-.cz-menubar__brand svg {
+.cz-menubar__leaf {
+  display: inline-grid;
+}
+
+.cz-menubar__leaf svg {
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.cz-menubar__brand:hover svg {
+.cz-menubar__brand:hover svg,
+.cz-menubar__home:hover svg {
   transform: rotate(-20deg) scale(1.12);
 }
 
+/* ---------- nav ---------- */
+
 .cz-menubar__nav {
-  margin: 0 auto 0 clamp(8px, 3vw, 36px);
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px;
+  border: 2px solid transparent;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .cz-menubar__nav ul {
@@ -44,10 +78,26 @@
   list-style: none;
 }
 
+/* equal side columns keep the leaf exactly in the middle of the pill */
+.is-compact .cz-menubar__nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 8px;
+  border-color: var(--ink);
+  background: rgba(255, 250, 241, 0.92);
+  box-shadow: 0 14px 34px -16px rgba(58, 43, 26, 0.45);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  backdrop-filter: blur(12px) saturate(1.2);
+}
+
+.is-compact .cz-menubar__nav ul:first-child {
+  justify-content: flex-end;
+}
+
 .cz-menubar__nav a {
   display: block;
-  padding: 6px 12px;
-  border-radius: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
   font-size: 17px;
   color: var(--ink);
   text-decoration: none;
@@ -65,7 +115,25 @@
   color: var(--paper);
 }
 
+.cz-menubar__nav .cz-menubar__home {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--butter);
+}
+
+.cz-menubar__nav .cz-menubar__home:hover {
+  background: var(--peach);
+}
+
+/* ---------- tray ---------- */
+
 .cz-menubar__tray {
+  justify-self: end;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -167,16 +235,24 @@
 
 @media (max-width: 640px) {
   .cz-menubar {
+    display: flex;
     gap: 8px;
+    padding: 0 8px;
   }
 
-  .cz-menubar__brand span,
+  .cz-menubar__nav {
+    margin: 0 auto;
+  }
+
+  .cz-menubar__name,
   .cz-music__label {
     display: none;
   }
 
-  .cz-menubar__nav {
-    margin-left: 4px;
+  /* the pill needs the whole width on phones; music comes back at the top */
+  .is-compact .cz-menubar__start,
+  .is-compact .cz-menubar__tray {
+    display: none;
   }
 
   .cz-menubar__nav ul {
@@ -184,7 +260,21 @@
   }
 
   .cz-menubar__nav a {
-    padding: 6px 8px;
-    font-size: 15px;
+    padding: 6px 7px;
+    font-size: 14px;
+  }
+
+  .cz-music {
+    padding: 0 10px;
+  }
+
+  .is-compact .cz-menubar__nav {
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .cz-menubar__nav .cz-menubar__home {
+    width: 36px;
+    height: 36px;
   }
 }
