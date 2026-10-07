@@ -17,11 +17,16 @@
     />
     <title>samyth · Samy Tahiri</title>
     <script>
-      try {
-        document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "dark");
-      } catch {
-        document.documentElement.setAttribute("data-theme", "dark");
-      }
+      // same rule as ThemeProvider: dark from 6pm to 6am unless switched by hand this visit
+      (function () {
+        var hour = new Date().getHours();
+        var theme = hour >= 18 || hour < 6 ? "dark" : "light";
+        try {
+          theme = sessionStorage.getItem("theme-override") || theme;
+        } catch (e) {}
+        document.documentElement.setAttribute("data-theme", theme);
+        document.querySelector('meta[name="theme-color"]').setAttribute("content", theme === "dark" ? "#18130e" : "#f6ead8");
+      })();
     </script>
   </head>
   <body>
