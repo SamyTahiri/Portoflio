@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { motionValue } from "framer-motion";
 
-const FRICTION = 1.4; // per second; higher = shorter glide (1.4 ≈ framer's default throw)
-const BOUNCE = 0.4; // share of speed kept after hitting a wall or another sticker
+const FRICTION = 0; // per second; higher = shorter glide (1.4 ≈ framer's default throw)
+const BOUNCE = 0.65; // share of speed kept after hitting a wall or another sticker
 const MAX_SPEED = 2600; // px/s, so a wild flick doesn't launch a sticker across the page
 const REST_SPEED = 6; // px/s, below this a sticker counts as stopped
 
