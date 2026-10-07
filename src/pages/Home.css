@@ -12,6 +12,9 @@
   --butter: #f8d58a;
   --sage: #cfd8a9;
   --moss: #5f7a32;
+  /* the hard offset shadows, and text sitting on the pastel fills; both are just ink in light mode */
+  --shadow: var(--ink);
+  --on-pastel: var(--ink);
 
   --font-display: "Fredoka", "General Sans", system-ui, sans-serif;
   --font-body: "General Sans", system-ui, sans-serif;
@@ -140,7 +143,7 @@ html:has(.cz-page) {
   border: 2.5px solid var(--ink);
   border-radius: 999px;
   background: var(--paper);
-  box-shadow: 4px 4px 0 var(--ink);
+  box-shadow: 4px 4px 0 var(--shadow);
   font: 600 17px/1.1 var(--font-display);
   color: var(--ink);
   text-decoration: none;
@@ -152,12 +155,12 @@ html:has(.cz-page) {
 }
 
 .cz-btn:hover {
-  box-shadow: 6px 6px 0 var(--ink);
+  box-shadow: 6px 6px 0 var(--shadow);
   transform: translate(-2px, -2px);
 }
 
 .cz-btn:active {
-  box-shadow: 1px 1px 0 var(--ink);
+  box-shadow: 1px 1px 0 var(--shadow);
   transform: translate(3px, 3px);
 }
 

@@ -1,0 +1,296 @@
+/* ---------- dark theme: the same desk, after sunset ----------
+   ink flips to cream for text and outlines, the shadows go near-black,
+   and anything sitting on a pastel fill keeps dark text via --on-pastel */
+
+[data-theme="dark"] .cz-page {
+  --ink: #f1e4cc;
+  --ink-soft: #c2ab8a;
+  --paper: #2a2119;
+  --page: #18130e;
+  --grid: rgba(239, 138, 60, 0.07);
+  --orange: #ef8a3c;
+  --orange-deep: #f5a566;
+  --peach: #e6a77c;
+  --butter: #e6c26f;
+  --sage: #b6c08c;
+  --moss: #a9c46a;
+  --shadow: #070504;
+  --on-pastel: #2a1d10;
+
+  color-scheme: dark;
+}
+
+[data-theme="dark"] body:has(.cz-page) {
+  background: #18130e;
+  color: #f1e4cc;
+}
+
+[data-theme="dark"] .cz-page ::selection {
+  color: var(--on-pastel);
+}
+
+[data-theme="dark"] .cz-skip,
+[data-theme="dark"] .cz-heading__label,
+[data-theme="dark"] .cz-btn--primary {
+  color: var(--on-pastel);
+}
+
+/* ---------- menu bar ---------- */
+
+[data-theme="dark"] .cz-menubar {
+  background: rgba(24, 19, 14, 0.86);
+}
+
+[data-theme="dark"] .cz-menubar.is-compact {
+  background: transparent;
+}
+
+[data-theme="dark"] .is-compact .cz-menubar__nav {
+  background: rgba(42, 33, 25, 0.92);
+  box-shadow: 0 14px 34px -16px rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="dark"] .cz-music:hover,
+[data-theme="dark"] .cz-theme:hover {
+  background: #3a2e22;
+}
+
+[data-theme="dark"] .cz-music.is-playing {
+  color: var(--on-pastel);
+}
+
+[data-theme="dark"] .cz-music.is-playing .cz-music__bars i {
+  background: var(--on-pastel);
+}
+
+/* ---------- hero ---------- */
+
+[data-theme="dark"] .cz-notebook {
+  background: linear-gradient(150deg, #7a4a25 0%, #5c3518 55%, #4a2a12 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 220, 170, 0.18),
+    0 30px 60px -28px rgba(0, 0, 0, 0.9);
+}
+
+[data-theme="dark"] .cz-notebook__paper {
+  border-color: rgba(241, 228, 204, 0.35);
+  background-image:
+    linear-gradient(
+      90deg,
+      transparent var(--margin-line),
+      rgba(226, 85, 63, 0.45) var(--margin-line) calc(var(--margin-line) + 2px),
+      transparent calc(var(--margin-line) + 2px)
+    ),
+    repeating-linear-gradient(180deg, transparent 0 35px, rgba(111, 155, 214, 0.14) 35px 36px);
+}
+
+[data-theme="dark"] .cz-hero__role mark {
+  background: linear-gradient(transparent 58%, rgba(239, 138, 60, 0.45) 58%);
+}
+
+[data-theme="dark"] .cz-coffee {
+  border-color: rgba(214, 150, 88, 0.14);
+}
+
+[data-theme="dark"] .cz-sticker,
+[data-theme="dark"] .cz-about__heart {
+  filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff)
+    drop-shadow(0 6px 8px rgba(0, 0, 0, 0.6));
+}
+
+/* ---------- tape ---------- */
+
+[data-theme="dark"] .cz-tape__item {
+  color: var(--on-pastel);
+}
+
+[data-theme="dark"] .cz-tape__star {
+  color: #8a3c19;
+}
+
+[data-theme="dark"] .cz-tape--front {
+  box-shadow: 0 10px 24px -14px rgba(0, 0, 0, 0.9);
+}
+
+/* ---------- about ---------- */
+
+[data-theme="dark"] .cz-polaroid {
+  border-color: rgba(0, 0, 0, 0.3);
+  background: #efe5d3;
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.2),
+    0 26px 40px -22px rgba(0, 0, 0, 0.9);
+  color: var(--on-pastel);
+}
+
+[data-theme="dark"] .cz-note {
+  background-image: radial-gradient(rgba(241, 228, 204, 0.07) 1.2px, transparent 1.2px);
+}
+
+[data-theme="dark"] .cz-tag > * {
+  color: var(--on-pastel);
+}
+
+/* ---------- work ---------- */
+
+[data-theme="dark"] .cz-folder {
+  --folder: #e3bf78;
+  --folder-back: #b98d45;
+}
+
+[data-theme="dark"] .cz-folder--peach {
+  --folder: #e6aa82;
+  --folder-back: #b97a50;
+}
+
+[data-theme="dark"] .cz-folder--sage {
+  --folder: #bec795;
+  --folder-back: #8f9c62;
+}
+
+[data-theme="dark"] .cz-folder--rose {
+  --folder: #dfb0b3;
+  --folder-back: #b37c83;
+}
+
+[data-theme="dark"] .cz-folder__tab,
+[data-theme="dark"] .cz-folder__front > * {
+  color: var(--on-pastel);
+}
+
+[data-theme="dark"] .cz-folder__sheet {
+  background: #ece2cf;
+}
+
+[data-theme="dark"] .cz-folder__open:focus-visible::after {
+  outline-color: var(--on-pastel);
+}
+
+[data-theme="dark"] .cz-sheet-backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .cz-sheet {
+  --folder: #e3bf78;
+
+  background:
+    linear-gradient(var(--folder), var(--folder)) top / 100% 12px no-repeat,
+    repeating-linear-gradient(180deg, transparent 0 31px, rgba(241, 228, 204, 0.06) 31px 33px),
+    var(--paper);
+}
+
+[data-theme="dark"] .cz-sheet--peach {
+  --folder: #e6aa82;
+}
+
+[data-theme="dark"] .cz-sheet--sage {
+  --folder: #bec795;
+}
+
+[data-theme="dark"] .cz-sheet--rose {
+  --folder: #dfb0b3;
+}
+
+[data-theme="dark"] .cz-sheet__close {
+  color: var(--on-pastel);
+}
+
+[data-theme="dark"] .cz-sheet .cz-chips li {
+  background: rgba(241, 228, 204, 0.08);
+}
+
+[data-theme="dark"] .cz-sheet__item {
+  border-top-color: rgba(241, 228, 204, 0.25);
+}
+
+/* ---------- toolbox ---------- */
+
+[data-theme="dark"] .cz-window__title {
+  color: var(--on-pastel);
+}
+
+[data-theme="dark"] .cz-key {
+  background: linear-gradient(180deg, #3d3126 0%, #2d241b 100%);
+  box-shadow:
+    inset 0 -4px 0 rgba(0, 0, 0, 0.3),
+    0 5px 0 var(--shadow);
+}
+
+[data-theme="dark"] .cz-key:hover {
+  background: linear-gradient(180deg, #4a3b2d 0%, #382c21 100%);
+}
+
+[data-theme="dark"] .cz-key--accent {
+  background: linear-gradient(180deg, #f6a463 0%, var(--orange) 100%);
+  color: var(--on-pastel);
+}
+
+[data-theme="dark"] .cz-key--accent:hover {
+  background: linear-gradient(180deg, #f9b47a 0%, #f2975a 100%);
+}
+
+[data-theme="dark"] .cz-key:active,
+[data-theme="dark"] .cz-key.is-pressed {
+  box-shadow:
+    inset 0 -2px 0 rgba(0, 0, 0, 0.3),
+    0 1px 0 var(--shadow);
+}
+
+[data-theme="dark"] .cz-key.is-pressed {
+  background: linear-gradient(180deg, #f0d88f 0%, var(--butter) 100%);
+  color: var(--on-pastel);
+}
+
+/* ---------- contact ---------- */
+
+[data-theme="dark"] .cz-postcard__card {
+  background: var(--paper);
+}
+
+[data-theme="dark"] .cz-postcard__side {
+  border-left-color: rgba(241, 228, 204, 0.3);
+}
+
+[data-theme="dark"] .cz-stamp {
+  filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, 0.5));
+}
+
+[data-theme="dark"] .cz-stamp__inner {
+  --ink: var(--on-pastel);
+
+  background: #f3e6d2;
+  color: var(--on-pastel);
+}
+
+[data-theme="dark"] .cz-postmark {
+  stroke: rgba(241, 228, 204, 0.45);
+}
+
+[data-theme="dark"] .cz-postmark text {
+  fill: rgba(241, 228, 204, 0.55);
+}
+
+[data-theme="dark"] .cz-postcard__address p {
+  border-bottom-color: rgba(241, 228, 204, 0.25);
+}
+
+/* ---------- footer ---------- */
+
+[data-theme="dark"] .cz-footer {
+  border-top-color: rgba(241, 228, 204, 0.18);
+  background: #0e0a07;
+}
+
+[data-theme="dark"] .cz-badge {
+  color: var(--on-pastel);
+}
+
+[data-theme="dark"] .cz-badge--ink {
+  color: #f8d58a;
+}
+
+@media (max-width: 860px) {
+  [data-theme="dark"] .cz-postcard__side {
+    border-top-color: rgba(241, 228, 204, 0.3);
+  }
+}

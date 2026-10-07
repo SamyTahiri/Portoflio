@@ -3,7 +3,7 @@
   border: 2.5px solid var(--ink);
   border-radius: 16px;
   background: var(--paper);
-  box-shadow: 6px 6px 0 var(--ink);
+  box-shadow: 6px 6px 0 var(--shadow);
 }
 
 .cz-window__bar {

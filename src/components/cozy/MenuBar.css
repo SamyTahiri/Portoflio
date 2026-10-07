@@ -156,7 +156,7 @@
   border: 2px solid var(--ink);
   border-radius: 999px;
   background: var(--paper);
-  box-shadow: 2px 2px 0 var(--ink);
+  box-shadow: 2px 2px 0 var(--shadow);
   font: 500 15px var(--font-pixel);
   color: var(--ink);
   cursor: pointer;
@@ -171,7 +171,7 @@
 }
 
 .cz-music:active {
-  box-shadow: 0 0 0 var(--ink);
+  box-shadow: 0 0 0 var(--shadow);
   transform: translate(2px, 2px);
 }
 
@@ -225,6 +225,53 @@
   }
 }
 
+/* ---------- theme switch ---------- */
+
+.cz-theme {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: 2px 2px 0 var(--shadow);
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.2s ease;
+}
+
+.cz-theme:hover {
+  background: #fff1dc;
+}
+
+.cz-theme:active {
+  box-shadow: 0 0 0 var(--shadow);
+  transform: translate(2px, 2px);
+}
+
+.cz-theme svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cz-theme:hover svg {
+  transform: rotate(-20deg) scale(1.1);
+}
+
+[data-theme="dark"] .cz-theme svg {
+  fill: var(--butter);
+  stroke: var(--butter);
+}
+
 /* ---------- small screens ---------- */
 
 @media (max-width: 860px) {
@@ -260,12 +307,21 @@
   }
 
   .cz-menubar__nav a {
-    padding: 6px 7px;
+    padding: 6px 5px;
     font-size: 14px;
   }
 
+  .cz-menubar__tray {
+    gap: 6px;
+  }
+
   .cz-music {
-    padding: 0 10px;
+    padding: 0 8px;
+  }
+
+  .cz-theme {
+    width: 30px;
+    height: 30px;
   }
 
   .is-compact .cz-menubar__nav {

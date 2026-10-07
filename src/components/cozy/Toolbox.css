@@ -45,7 +45,7 @@
   background: linear-gradient(180deg, #fffaf1 0%, #f1e6d3 100%);
   box-shadow:
     inset 0 -4px 0 rgba(58, 43, 26, 0.12),
-    0 5px 0 var(--ink);
+    0 5px 0 var(--shadow);
   font: 600 16px var(--font-display);
   user-select: none;
   cursor: pointer;
@@ -71,7 +71,7 @@
 .cz-key.is-pressed {
   box-shadow:
     inset 0 -2px 0 rgba(58, 43, 26, 0.12),
-    0 1px 0 var(--ink);
+    0 1px 0 var(--shadow);
   transform: translateY(4px);
 }
 
@@ -91,7 +91,7 @@
   border: 2px solid var(--ink);
   border-radius: 6px;
   background: var(--paper);
-  box-shadow: 0 2px 0 var(--ink);
+  box-shadow: 0 2px 0 var(--shadow);
   font: inherit;
   color: var(--ink);
 }

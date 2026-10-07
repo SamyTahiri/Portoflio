@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import PixelSprite from "./PixelSprite";
 import { LofiEngine } from "./lofiEngine";
+import { useTheme } from "../ui/useTheme";
 import "./MenuBar.css";
 
 const LINKS = [
@@ -97,6 +98,31 @@ function MusicToggle() {
   );
 }
 
+function ThemeSwitch() {
+  const { theme, toggleTheme } = useTheme();
+  const dark = theme === "dark";
+
+  return (
+    <button
+      type="button"
+      className="cz-theme"
+      onClick={toggleTheme}
+      aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
+    >
+      {dark ? (
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.5" />
+          <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
 export default function MenuBar() {
   const active = useActiveSection();
   const now = useClock();
@@ -155,6 +181,9 @@ export default function MenuBar() {
       </motion.nav>
 
       <div className="cz-menubar__tray">
+        <motion.div layout="position" transition={transition}>
+          <ThemeSwitch />
+        </motion.div>
         <motion.div layout="position" transition={transition}>
           <MusicToggle />
         </motion.div>

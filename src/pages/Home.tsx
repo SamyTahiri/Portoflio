@@ -8,6 +8,7 @@ import Toolbox from "../components/cozy/Toolbox";
 import Contact from "../components/cozy/Contact";
 import Footer from "../components/cozy/Footer";
 import "./Home.css";
+import "./HomeDark.css";
 
 export default function Home() {
   return (
