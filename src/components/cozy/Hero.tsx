@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import PixelSprite from "./PixelSprite";
 import { SPRITES, type SpriteName } from "./pixelArt";
 import { useMediaQuery } from "./useMediaQuery";
+import { useStickerPhysics } from "./useStickerPhysics";
 import { profile } from "../../data/portfolio";
 import "./Hero.css";
 
@@ -35,6 +36,7 @@ const NAME_WORDS = profile.name.split(" ").map((word, i, words) => ({
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
   const canDrag = useMediaQuery("(hover: hover) and (pointer: fine)");
+  const physics = useStickerPhysics(STICKERS.length, heroRef);
 
   return (
     <section id="top" className="cz-hero" ref={heroRef}>
@@ -101,28 +103,34 @@ export default function Hero() {
           </div>
         </div>
 
-        {STICKERS.map((sticker) => (
-          <motion.div
-            key={sticker.sprite}
-            className={`cz-sticker${sticker.compact ? " cz-sticker--compact" : ""}`}
-            style={{ ...sticker.position, rotate: sticker.rotate }}
-            drag={canDrag}
-            dragConstraints={heroRef}
-            dragElastic={0.15}
-            // short, quick settle so a flicked sticker stops close to where it's let go
-            dragTransition={{ power: 0.2, timeConstant: 150 }}
-            whileHover={canDrag ? { scale: 1.08, rotate: sticker.rotate + 6 } : undefined}
-            whileDrag={{ scale: 1.15, rotate: 0, zIndex: 20 }}
-            aria-hidden="true"
-          >
-            <span
-              className="cz-sticker__art"
-              style={{ "--sticker-w": `${SPRITES[sticker.sprite].width * sticker.scale}px` } as CSSProperties}
+        {STICKERS.map((sticker, i) => {
+          const { ref, style, onDragStart, onDragEnd } = physics(i);
+          return (
+            <motion.div
+              key={sticker.sprite}
+              ref={ref}
+              className={`cz-sticker${sticker.compact ? " cz-sticker--compact" : ""}`}
+              style={{ ...sticker.position, ...style, rotate: sticker.rotate }}
+              drag={canDrag}
+              dragConstraints={heroRef}
+              dragElastic={0.15}
+              // the physics hook takes over on release: glide, bounce off the edges and other stickers
+              dragMomentum={false}
+              onDragStart={onDragStart}
+              onDragEnd={onDragEnd}
+              whileHover={canDrag ? { scale: 1.08, rotate: sticker.rotate + 6 } : undefined}
+              whileDrag={{ scale: 1.15, rotate: 0, zIndex: 20 }}
+              aria-hidden="true"
             >
-              <PixelSprite name={sticker.sprite} scale={sticker.scale} />
-            </span>
-          </motion.div>
-        ))}
+              <span
+                className="cz-sticker__art"
+                style={{ "--sticker-w": `${SPRITES[sticker.sprite].width * sticker.scale}px` } as CSSProperties}
+              >
+                <PixelSprite name={sticker.sprite} scale={sticker.scale} />
+              </span>
+            </motion.div>
+          );
+        })}
 
         <p className="cz-hero__hint" aria-hidden="true">
           <svg viewBox="0 0 64 34" fill="none">
