@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
-import { motionValue } from "framer-motion";
+import { motionValue, type PanInfo } from "framer-motion";
 
-const FRICTION = 0; // per second; higher = shorter glide (1.4 ≈ framer's default throw)
-const BOUNCE = 0.65; // share of speed kept after hitting a wall or another sticker
-const MAX_SPEED = 2600; // px/s, so a wild flick doesn't launch a sticker across the page
-const REST_SPEED = 6; // px/s, below this a sticker counts as stopped
+const FRICTION = 1.8; // per second; higher = shorter glide (1.4 ≈ framer's default throw)
+const BOUNCE = 0.55; // share of speed kept after hitting a wall or another sticker
+const MAX_SPEED = 3000; // px/s, so a wild flick doesn't launch a sticker across the page
+const REST_SPEED = 12; // px/s, below this a sticker counts as stopped
 
 type Body = {
   vx: number;
@@ -186,13 +186,19 @@ export function useStickerPhysics(count: number, boundsRef: RefObject<HTMLElemen
       body.vy = 0;
       run();
     },
-    onDragEnd: () => {
+    onDragEnd: (_: unknown, info: PanInfo) => {
       const body = bodies.current[i];
-      const speed = Math.hypot(offsets[i].x.getVelocity(), offsets[i].y.getVelocity());
+      const { x, y } = offsets[i];
+      // framer starts its own (zero-momentum) release animation on x/y before this runs;
+      // stop it so it can't overwrite the glide, and take the throw speed from the pointer
+      // history, since the values' own velocity has already been reset by that animation
+      x.stop();
+      y.stop();
+      const speed = Math.hypot(info.velocity.x, info.velocity.y);
       const scale = speed > MAX_SPEED ? MAX_SPEED / speed : 1;
       body.dragging = false;
-      body.vx = offsets[i].x.getVelocity() * scale;
-      body.vy = offsets[i].y.getVelocity() * scale;
+      body.vx = info.velocity.x * scale;
+      body.vy = info.velocity.y * scale;
       run();
     },
   });
