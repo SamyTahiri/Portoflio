@@ -109,6 +109,8 @@ export default function Hero() {
             drag={canDrag}
             dragConstraints={heroRef}
             dragElastic={0.15}
+            // short, quick settle so a flicked sticker stops close to where it's let go
+            dragTransition={{ power: 0.2, timeConstant: 150 }}
             whileHover={canDrag ? { scale: 1.08, rotate: sticker.rotate + 6 } : undefined}
             whileDrag={{ scale: 1.15, rotate: 0, zIndex: 20 }}
             aria-hidden="true"

@@ -80,6 +80,22 @@
   color: #d8bf95;
 }
 
+.cz-footer__thanks {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: #d8bf95;
+}
+
+.cz-footer__thanks a {
+  color: inherit;
+  text-decoration: underline 1.5px var(--orange);
+  text-underline-offset: 3px;
+}
+
+.cz-footer__thanks a:hover {
+  color: #f6ead8;
+}
+
 .cz-footer__actions {
   display: flex;
   flex-wrap: wrap;

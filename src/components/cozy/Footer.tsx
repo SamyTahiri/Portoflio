@@ -78,6 +78,16 @@ export default function Footer() {
             <p className="cz-footer__visits">
               <PixelSprite name="star" scale={1.5} /> visit no. {visits} — thanks for stopping by
             </p>
+            <p className="cz-footer__thanks">
+              special mentions to{" "}
+              <a href="https://jerryxf.net/" target="_blank" rel="noreferrer">
+                Jerry
+              </a>{" "}
+              &amp;{" "}
+              <a href="https://www.raphdf201.net/" target="_blank" rel="noreferrer">
+                Raphaël
+              </a>
+            </p>
           </div>
 
           <div className="cz-footer__actions">
